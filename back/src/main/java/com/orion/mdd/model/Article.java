@@ -1,10 +1,7 @@
 package com.orion.mdd.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -14,7 +11,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Article {
+@EqualsAndHashCode(callSuper = true)
+public class Article extends Auditable  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;

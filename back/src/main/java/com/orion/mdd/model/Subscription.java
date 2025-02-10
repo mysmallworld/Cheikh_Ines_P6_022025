@@ -1,10 +1,7 @@
 package com.orion.mdd.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -13,7 +10,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Subscription {
+@EqualsAndHashCode(callSuper = true)
+public class Subscription extends Auditable  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
