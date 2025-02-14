@@ -18,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
 @Configuration
-public class JwtConfig {
+public class AuthConfig {
 
     @Value("${MyJwtKey}")
     private String jwtKey;
