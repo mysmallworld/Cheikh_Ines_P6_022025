@@ -8,6 +8,7 @@ public class MddApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MddApplication.class, args);
+		System.out.println("Welcome to MDD !");
 	}
 
 }
