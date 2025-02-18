@@ -6,7 +6,6 @@ import com.orion.mdd.dto.request.RegisterDto;
 import com.orion.mdd.mapper.UserMapper;
 import com.orion.mdd.model.User;
 import com.orion.mdd.repository.UserRepository;
-import com.orion.mdd.security.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -45,7 +44,12 @@ public class AuthService {
 
     public String loginUser(LoginDto userDto) {
         try {
-            User user = userRepository.findByEmail(userDto.getEmailOrUsername());
+            User user;
+            if(userDto.getEmailOrUsername().contains("@")){
+                user = userRepository.findByEmail(userDto.getEmailOrUsername());
+            } else {
+                user = userRepository.findByUsername(userDto.getEmailOrUsername());
+            }
             Boolean isSamePassword = authconfig.passwordEncoder().matches(userDto.getPassword(), user.getPassword());
             if ((user != null) && !isSamePassword) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwords do not match");

@@ -4,7 +4,6 @@ import com.orion.mdd.dto.response.UserResponse;
 import com.orion.mdd.mapper.UserMapper;
 import com.orion.mdd.model.User;
 import com.orion.mdd.repository.UserRepository;
-import com.orion.mdd.security.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

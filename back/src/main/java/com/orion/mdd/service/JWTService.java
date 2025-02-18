@@ -1,4 +1,4 @@
-package com.orion.mdd.security;
+package com.orion.mdd.service;
 
 import com.orion.mdd.model.User;
 import org.springframework.http.HttpStatus;
