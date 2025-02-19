@@ -1,5 +1,6 @@
 package com.orion.mdd.service;
 
+import com.orion.mdd.dto.request.UserDto;
 import com.orion.mdd.dto.response.UserResponse;
 import com.orion.mdd.mapper.UserMapper;
 import com.orion.mdd.model.User;
@@ -9,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,7 +24,7 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
-    public UserResponse getUser(String authorizationHeader) {
+    public UserResponse getUserByToken(String authorizationHeader) {
         try {
             if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authorization header must start with Bearer");
@@ -47,20 +47,16 @@ public class UserService {
         }
     }
 
-    public UserResponse getUserById(UUID id) {
+    public String updateUser(UUID id, UserDto userDto) {
         try {
-            Optional<User> optionalUser = userRepository.findById(id);
+            User user = userRepository.findById(id).get();
 
-            if (optionalUser.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-            }
+            user.setUsername(userDto.getUsername() != null ? userDto.getUsername() : user.getUsername());
+            user.setEmail(userDto.getEmail() != null ? userDto.getEmail() : user.getEmail());
+            userRepository.save(user);
 
-            User user = optionalUser.get();
-
-            UserResponse userResponseDto = userMapper.toDto(user);
-
-            return userResponseDto;
-        } catch (Exception e) {
+            return "User has been updated !";
+        } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
