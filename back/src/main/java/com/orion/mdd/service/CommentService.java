@@ -1,6 +1,7 @@
 package com.orion.mdd.service;
 
 import com.orion.mdd.dto.request.CommentDto;
+import com.orion.mdd.dto.response.CommentResponse;
 import com.orion.mdd.mapper.CommentMapper;
 import com.orion.mdd.model.Article;
 import com.orion.mdd.model.Comment;
@@ -13,7 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -29,7 +32,24 @@ public class CommentService {
     @Autowired
     private ArticleRepository articleRepository;
 
-    public Comment postComment(String token, CommentDto commentDto, UUID id) {
+    public CommentResponse getCommentsByArticle(UUID articleId) {
+        try {
+            Article article = articleRepository.findById(articleId)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Article not found"));
+
+            List<CommentDto> commentDtos = commentRepository.findByArticle(article)
+                    .stream()
+                    .map(commentMapper::toDto)
+                    .collect(Collectors.toList());
+
+            CommentResponse commentResponse = CommentResponse.builder().comments(commentDtos).build();
+            return commentResponse;
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+    }
+
+    public Comment postComment(String token, CommentDto commentDto, UUID articleId) {
         try {
             Comment comment = commentMapper.toEntity(commentDto);
 
@@ -37,7 +57,7 @@ public class CommentService {
             User user = userRepository.findByEmail(userEmail);
             comment.setAuthor(user);
 
-            Article article = articleRepository.findArticleById(id);
+            Article article = articleRepository.findArticleById(articleId);
             comment.setArticle(article);
 
             commentRepository.save(comment);
