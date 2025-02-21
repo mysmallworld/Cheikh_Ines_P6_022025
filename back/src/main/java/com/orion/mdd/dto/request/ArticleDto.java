@@ -1,5 +1,6 @@
 package com.orion.mdd.dto.request;
 
+import com.orion.mdd.model.Topic;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class ArticleDto {
     private String content;
 
     @NotBlank
-    private String topic;
+    private String topicTitle;
 
     private LocalDate datePublication;
 }

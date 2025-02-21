@@ -14,6 +14,8 @@ public class ArticleMapper {
         articleDto.setId(article.getId());
         articleDto.setTitle(article.getTitle());
         articleDto.setContent(article.getContent());
+        articleDto.setTopicTitle(article.getTopic().getTitle());
+        articleDto.setDatePublication(article.getDatePublication());
         return articleDto;
     }
 

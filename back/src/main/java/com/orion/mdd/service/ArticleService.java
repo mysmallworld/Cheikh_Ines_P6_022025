@@ -64,7 +64,7 @@ public class ArticleService {
             User user = userRepository.findByEmail(userEmail);
             article.setAuthor(user);
 
-            Topic topic = topicRepository.findByTitle(articleDto.getTopic());
+            Topic topic = topicRepository.findByTitle(articleDto.getTopicTitle());
             article.setTopic(topic);
 
             articleRepository.save(article);
