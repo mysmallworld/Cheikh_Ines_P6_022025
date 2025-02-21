@@ -27,7 +27,7 @@ public class TopicController {
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Topics informations"),
-            @ApiResponse(responseCode = "404", description = "Topics not found")
+            @ApiResponse(responseCode = "401", description = "Unauthorized")
     })
     @GetMapping
     public ResponseEntity<TopicResponse> getAllTopics(){

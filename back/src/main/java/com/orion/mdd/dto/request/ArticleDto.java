@@ -6,11 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArticleDto {
+    private UUID id;
+
     @NotBlank
     private String title;
 
@@ -18,5 +21,7 @@ public class ArticleDto {
     private String content;
 
     @NotBlank
+    private String topic;
+
     private LocalDate datePublication;
 }

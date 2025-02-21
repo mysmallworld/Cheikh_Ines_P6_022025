@@ -1,16 +1,16 @@
 package com.orion.mdd.dto.response;
 
+import com.orion.mdd.dto.request.ArticleDto;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
-import java.time.LocalDate;
-import java.util.UUID;
+import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class ArticleResponse {
-    private UUID id;
-    private String title;
-    private String content;
-    private LocalDate datePublication;
+    private List<ArticleDto> articles;
 }
