@@ -12,7 +12,6 @@ import java.util.UUID;
 @Builder
 public class Comment extends Auditable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Lob

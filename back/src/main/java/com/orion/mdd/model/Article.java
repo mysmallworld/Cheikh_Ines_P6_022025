@@ -13,7 +13,6 @@ import java.util.UUID;
 @Builder
 public class Article extends Auditable  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(nullable = false)

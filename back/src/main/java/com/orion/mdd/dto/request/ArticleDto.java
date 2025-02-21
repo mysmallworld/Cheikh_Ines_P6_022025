@@ -12,11 +12,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ArticleDto {
     @NotBlank
-    String title;
+    private String title;
 
     @NotBlank
-    String content;
+    private String content;
 
     @NotBlank
-    LocalDate datePublication;
+    private LocalDate datePublication;
 }
