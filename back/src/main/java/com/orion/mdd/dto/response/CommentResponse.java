@@ -1,8 +1,8 @@
 package com.orion.mdd.dto.response;
 
-import java.util.UUID;
+import com.orion.mdd.dto.request.CommentDto;
+import java.util.List;
 
 public class CommentResponse {
-    private UUID id;
-    private String content;
+    List<CommentDto> comments;
 }
