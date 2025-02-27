@@ -6,12 +6,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
 
+@Configuration
 public class JwtBlacklistFilter extends GenericFilterBean {
 
     private final JWTService jwtService;
