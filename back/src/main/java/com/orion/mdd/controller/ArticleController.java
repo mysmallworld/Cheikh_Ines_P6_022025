@@ -47,7 +47,7 @@ public class ArticleController {
             @ApiResponse(responseCode = "401", description = "Unauthorized")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<ArticleDto> getArticle(@PathVariable UUID id){
+    public ResponseEntity<ArticleDto> getArticle(@PathVariable("id") UUID id){
         ArticleDto articleDto = articleService.getArticle(id);
         return new ResponseEntity<>(articleDto, HttpStatus.OK);
     }
