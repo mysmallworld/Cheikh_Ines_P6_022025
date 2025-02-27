@@ -1,22 +1,28 @@
 package com.orion.mdd.dto.request;
 
+import com.orion.mdd.model.Topic;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArticleDto {
-    @NotBlank
-    String title;
+    private UUID id;
 
     @NotBlank
-    String content;
+    private String title;
 
     @NotBlank
-    LocalDate datePublication;
+    private String content;
+
+    @NotBlank
+    private String topicTitle;
+
+    private LocalDate datePublication;
 }

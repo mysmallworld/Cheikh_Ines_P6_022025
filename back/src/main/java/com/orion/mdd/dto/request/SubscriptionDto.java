@@ -1,6 +1,6 @@
 package com.orion.mdd.dto.request;
 
-import com.orion.mdd.model.Article;
+import com.orion.mdd.model.Topic;
 import com.orion.mdd.model.User;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -12,13 +12,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommentDto {
+public class SubscriptionDto {
     private UUID id;
-
-    @NotBlank
-    private  String content;
-
-    private Article article;
-
-    private User author;
+    private User user;
+    private Topic topic;
 }
