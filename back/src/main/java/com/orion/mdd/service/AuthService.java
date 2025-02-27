@@ -60,4 +60,13 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
+
+    public String logoutUser(String token) {
+        try {
+            jwtService.invalidateToken(token);
+            return "User successfully logged out";
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Logout failed");
+        }
+    }
 }

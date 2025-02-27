@@ -10,10 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -53,5 +50,20 @@ public class AuthController {
         String token = authService.loginUser(loginDto);
         AuthResponse loginResponse = AuthResponse.builder().token(token).build();
         return new ResponseEntity<>(loginResponse, HttpStatus.OK);
+    }
+
+    @Operation(
+            summary = "Logout a user",
+            description = "Put user's token into Jwt blacklist."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User is logout"),
+            @ApiResponse(responseCode = "401", description = "Bad token")
+    })
+    @PostMapping("/logout")
+    public ResponseEntity<String> logoutUser(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.substring(7);
+        String logoutUser = authService.logoutUser(token);
+        return new ResponseEntity<>(logoutUser, HttpStatus.OK);
     }
 }
