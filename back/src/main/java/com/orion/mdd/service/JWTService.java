@@ -11,12 +11,16 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
 @Service
 public class JWTService {
 
     private JwtEncoder jwtEncoder;
-
     private JwtDecoder jwtDecoder;
+
+    private Set<String> tokenBlacklist = ConcurrentHashMap.newKeySet();
 
     public JWTService(JwtEncoder jwtEncoder, JwtDecoder jwtDecoder) {
         this.jwtEncoder = jwtEncoder;
@@ -37,10 +41,20 @@ public class JWTService {
 
     public Map<String, Object> decodeToken(String token) {
         try {
+            if (isTokenBlacklisted(token)) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token has been revoked");
+            }
             Jwt decodedJwt = this.jwtDecoder.decode(token);
             return decodedJwt.getClaims();
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Failed to decode token");
         }
+    }
+    public boolean isTokenBlacklisted(String token) {
+        return tokenBlacklist.contains(token);
+    }
+
+    public void invalidateToken(String token) {
+        tokenBlacklist.add(token);
     }
 }
