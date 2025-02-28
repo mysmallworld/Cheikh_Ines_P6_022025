@@ -7,8 +7,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -16,7 +14,6 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
     FormComponent, 
