@@ -4,15 +4,14 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-form',
-  standalone: true,
-  imports: [
-    CommonModule, 
-    RouterModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
+    selector: 'app-form',
+    imports: [
+        CommonModule,
+        RouterModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: './form.component.html',
+    styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit, DoCheck {
 
