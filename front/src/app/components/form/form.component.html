@@ -3,29 +3,32 @@
     <img src="/assets/logo_p6.png" alt="logo" />
   </div>
 
-  <div class="arrow">
-    <i class="pi pi-arrow-left" (click)="goToHomePage()"></i>
+  <div class="arrow-back">
+    <i class="material-icons" (click)="goToHomePage()">arrow_back</i>
   </div>
 
-  <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="form">
-    <h1 class="title">{{ title }}</h1>
+  <div class="flex flex-col">
+      <h1 class="title">{{ title }}</h1>
+      
+      <div class="form-field" *ngIf="isSignup">
+        <label for="username">Nom d'utilisateur</label>
+        <input pinputtext="" id="username" type="text" class="p-inputtext p-component p-inputtext-fluid" pc1081="">
+      </div>
+      <div class="form-field" *ngIf="isSignup">
+        <label for="email">Adresse e-mail</label>
+        <input pinputtext="" id="email" type="text" class="p-inputtext p-component p-inputtext-fluid" pc1082="">
+      </div>
 
-    <p-inputText *ngIf="isSignup" formControlName="username" placeholder="Nom d'utilisateur" [ngClass]="{'p-invalid': usernameError}">
-    </p-inputText>
-    <small class="p-error" *ngIf="usernameError">{{ usernameError }}</small>
+      <div class="form-field" *ngIf="isLogin">
+        <label for="emailOrUsername">E-mail ou nom d'utilisateur</label>
+        <input pinputtext="" id="emailOrUsername" type="text" class="p-inputtext p-component p-inputtext-fluid" pc1081="">
+      </div>
 
-    <p-inputText *ngIf="isSignup" formControlName="email" placeholder="Email" [ngClass]="{'p-invalid': emailError}">
-    </p-inputText>
-    <small class="p-error" *ngIf="emailError">{{ emailError }}</small>
-
-    <p-inputText *ngIf="isLogin" formControlName="emailOrUsername" placeholder="Email ou nom d'utilisateur" [ngClass]="{'p-invalid': emailOrUsernameError}">
-    </p-inputText>
-    <small class="p-error" *ngIf="emailOrUsernameError">{{ emailOrUsernameError }}</small>
-
-    <p-password formControlName="password" placeholder="Mot de passe" [ngClass]="{'p-invalid': passwordError}" toggleMask>
-    </p-password>
-    <small class="p-error" *ngIf="passwordError">{{ passwordError }}</small>
-
-    <!-- <p-button type="submit" [label]="submitLabel"></p-button> -->
-  </form>
+      <div class="form-field">
+        <label for="password">Mot de passe</label>
+        <input pinputtext="" id="password" type="text" class="p-inputtext p-component p-inputtext-fluid" pc1083="">
+      </div>
+      
+      <p-button type="submit" label="{{ submitLabel }}" class="button"></p-button>
+  </div>
 </div>

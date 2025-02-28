@@ -5,7 +5,8 @@ import { FormComponent } from "../../components/form/form.component";
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.scss'],
-    imports: [FormComponent]
+    imports: [FormComponent],
+    standalone: true
 })
 export class SignUpComponent implements OnInit {
   constructor() { }

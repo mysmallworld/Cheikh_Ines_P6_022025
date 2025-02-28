@@ -1,19 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { DividerModule } from 'primeng/divider';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
-    selector: 'app-form',
-    imports: [
-        CommonModule,
-        RouterModule,
-        ReactiveFormsModule
-    ],
-    templateUrl: './form.component.html',
-    styleUrls: ['./form.component.scss']
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss'],
+  imports: [CommonModule, ReactiveFormsModule, DividerModule, ButtonModule, InputTextModule]
 })
-export class FormComponent implements OnInit, DoCheck {
+export class FormComponent implements OnInit, OnChanges {
 
   @Input() title: string = 'Inscription';
   @Input() submitLabel: string = "S'inscrire";
@@ -30,6 +29,12 @@ export class FormComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {
     this.initializeForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isLogin'] || changes['isSignup']) {
+      this.initializeForm();
+    }
   }
 
   initializeForm(): void {
@@ -68,17 +73,6 @@ export class FormComponent implements OnInit, DoCheck {
       }
     }
     return undefined;
-  }
-
-  ngDoCheck(): void {
-    if (this.isLogin) {
-      this.emailOrUsernameError = this.getErrorMessage('emailOrUsername');
-      this.passwordError = this.getErrorMessage('password');
-    } else {
-      this.emailError = this.getErrorMessage('email');
-      this.passwordError = this.getErrorMessage('password');
-      this.usernameError = this.getErrorMessage('username');
-    }
   }
 
   goToHomePage(): void {
