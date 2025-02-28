@@ -1,0 +1,39 @@
+<div class="form-auth">
+  <div class="logo">
+    <img src="/assets/logo_p6.png" alt="logo" />
+  </div>
+
+  <div class="arrow">
+    <i class="material-icons" (click)="goToHomePage()">arrow_back</i>
+  </div>
+
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="form">
+    <h1 class="title">{{ title }}</h1>
+
+    <mat-form-field *ngIf="isSignup">
+      <p>Nom d'utilisateur</p>
+      <input matInput formControlName="username">
+      <mat-error *ngIf="usernameError">{{ usernameError }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isSignup">
+      <p>Email</p>
+      <input matInput formControlName="email">
+      <mat-error *ngIf="emailError">{{ emailError }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isLogin">
+      <p>Email ou nom d'utilisateur</p>
+      <input matInput formControlName="emailOrUsername">
+      <mat-error *ngIf="emailOrUsernameError">{{ emailOrUsernameError }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <p>Mot de passe</p>
+      <input matInput formControlName="password">
+      <mat-error *ngIf="passwordError">{{ passwordError }}</mat-error>
+    </mat-form-field>
+    
+    <button mat-raised-button type="submit">{{ submitLabel }}</button>
+  </form>
+</div>
