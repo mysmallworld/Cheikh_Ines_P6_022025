@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-form',
@@ -10,8 +9,7 @@ import { ButtonModule } from 'primeng/button';
   imports: [
     CommonModule, 
     RouterModule,
-    ReactiveFormsModule,
-    ButtonModule
+    ReactiveFormsModule
   ],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
